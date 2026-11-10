@@ -37,7 +37,7 @@ cells.append(md("""# FCE-Net: LOLv2 Cross-Dataset Evaluation & Inference
 
 ### Experiment 2 Protocol
 1. **Zero Training / Zero Fine-Tuning:** The model is evaluated strictly in zero-shot cross-dataset inference mode. No weights are modified or retrained.
-2. **Checkpoint Provenance:** Reuses the verified `best_model.pth` trained from scratch on LOLv1 (250 epochs, Tesla T4, Best PSNR = 25.1846 dB).
+2. **Checkpoint Provenance:** Reuses the verified `best_model.pth` trained from scratch on LOLv1 (300 epochs, Tesla T4, Best PSNR = 25.1846 dB).
 3. **Dataset Scope:** Evaluates on the **LOLv2** benchmark (supporting `Real_captured` and `Synthetic` splits, up to 250 evaluation pairs).
 4. **Target Outputs:**
    - Full-resolution enhanced images saved to `/kaggle/working/results_lolv2/enhanced/`

@@ -3,7 +3,6 @@
 ## Project: 24BCE7695
 **Paper Title:** FCE-Net: A Frequency-Color-Edge Aware YUV Network for Low-Light Image Enhancement — Mathematical Foundations, Full Architectural Reproduction, and Cross-Dataset Benchmarking  
 **Student Presenter:** Akhil Harshavardhan (Registration Number: **24BCE7695**)  
-**Supervisor / Lead Architect:** Ashok  
 **Original Paper Authors:** Zengyang Guo, Zhidan Cai, Haoyao Xia, Shifeng Hu (Pattern Analysis and Applications, Springer Nature, 2026)  
 
 ---

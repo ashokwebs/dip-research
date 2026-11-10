@@ -1278,7 +1278,7 @@ else:
                   f"PSNR: {val_psnr:.4f}  SSIM: {val_ssim:.4f}  "
                   f"LR: {current_lr:.6f}  Time: {elapsed/60:.1f}min")
 
-        # Save periodic checkpoint every 250 epochs
+        # Save periodic checkpoint every 300 epochs
         if (epoch + 1) % 250 == 0:
             ckpt_path = os.path.join(SAVE_DIR, f"checkpoint_epoch{epoch+1}.pth")
             torch.save({

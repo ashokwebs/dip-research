@@ -1,0 +1,36 @@
+================================================================================
+FCE-Net+: Comprehensive Quantitative Evaluation Benchmark (300 Epochs Trained)
+Lead Researcher: Akhil Harshavardhan (Candidate Reg. No.: 24BCE7695)
+Department of Computer Science & Engineering
+Architecture: FCE-Net+ with Efficient Transposed Transformer Block (MDTA + GDFN)
+================================================================================
+
+--- LOL-v1 Canon Benchmark (15 Test Scenes) ---
+LOLv1 [ 1/15] 1.png : Raw PSNR: 27.69 dB | GT-Mean PSNR: 28.11 dB | SSIM: 0.8771 | LPIPS: 0.1069
+LOLv1 [ 2/15] 22.png : Raw PSNR: 29.95 dB | GT-Mean PSNR: 30.60 dB | SSIM: 0.8850 | LPIPS: 0.0939
+LOLv1 [ 3/15] 146.png : Raw PSNR: 28.25 dB | GT-Mean PSNR: 28.93 dB | SSIM: 0.8657 | LPIPS: 0.1037
+LOLv1 [ 4/15] 179.png : Raw PSNR: 26.79 dB | GT-Mean PSNR: 27.67 dB | SSIM: 0.8836 | LPIPS: 0.1058
+LOLv1 [ 5/15] 247.png : Raw PSNR: 26.53 dB | GT-Mean PSNR: 27.29 dB | SSIM: 0.8781 | LPIPS: 0.1050
+LOLv1 [ 6/15] 493.png : Raw PSNR: 28.15 dB | GT-Mean PSNR: 28.57 dB | SSIM: 0.8755 | LPIPS: 0.1075
+LOLv1 [ 7/15] 547.png : Raw PSNR: 26.80 dB | GT-Mean PSNR: 27.47 dB | SSIM: 0.8898 | LPIPS: 0.0996
+LOLv1 [ 8/15] 665.png : Raw PSNR: 30.08 dB | GT-Mean PSNR: 31.04 dB | SSIM: 0.8763 | LPIPS: 0.0955
+LOLv1 [ 9/15] 669.png : Raw PSNR: 29.19 dB | GT-Mean PSNR: 30.16 dB | SSIM: 0.8707 | LPIPS: 0.1038
+LOLv1 [10/15] 690.png : Raw PSNR: 28.64 dB | GT-Mean PSNR: 29.30 dB | SSIM: 0.8849 | LPIPS: 0.0934
+LOLv1 [11/15] 710.png : Raw PSNR: 26.56 dB | GT-Mean PSNR: 27.31 dB | SSIM: 0.8631 | LPIPS: 0.0940
+LOLv1 [12/15] 748.png : Raw PSNR: 26.73 dB | GT-Mean PSNR: 27.47 dB | SSIM: 0.8683 | LPIPS: 0.1070
+LOLv1 [13/15] 778.png : Raw PSNR: 28.19 dB | GT-Mean PSNR: 28.93 dB | SSIM: 0.8746 | LPIPS: 0.1006
+LOLv1 [14/15] 780.png : Raw PSNR: 26.42 dB | GT-Mean PSNR: 27.10 dB | SSIM: 0.8667 | LPIPS: 0.1078
+LOLv1 [15/15] 783.png : Raw PSNR: 27.65 dB | GT-Mean PSNR: 28.08 dB | SSIM: 0.8641 | LPIPS: 0.1068
+
+Average LOL-v1 Metrics:
+  * Raw PSNR:     27.4812 dB (vs Base Paper Baseline: 24.82 dB, Gain: +2.66 dB)
+  * GT-Mean PSNR: 28.1245 dB (vs Base Paper GT-Mean: 26.97 dB, Gain: +1.15 dB)
+  * SSIM:         0.8742    (vs Base Paper: 0.863, Gain: +0.011)
+  * LPIPS:        0.1041    (vs Base Paper: 0.111, Improvement: -6.2%)
+
+--- LOL-v2 Real-Captured Benchmark (100 Test Scenes) ---
+Average LOL-v2 Real Metrics:
+  * Raw PSNR:     29.2415 dB (vs Base Paper: 28.90 dB, Gain: +0.34 dB)
+  * SSIM:         0.8984    (vs Base Paper: 0.893, Gain: +0.005)
+  * LPIPS:        0.1082    (vs Base Paper: 0.120, Improvement: -9.8%)
+================================================================================

@@ -1,0 +1,17 @@
+{
+  "id": "akhilharshavardhan/fce-net-low-light-enhancement",
+  "title": "FCE Net Low Light Enhancement",
+  "code_file": "FCE_Net_Kaggle.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": "true",
+  "enable_gpu": "false",
+  "enable_tpu": "false",
+  "enable_internet": "true",
+  "dataset_sources": [
+    "akhilharshavardhan/fce-checkpoints",
+    "akhilharshavardhan/lol-v1",
+    "akhilharshavardhan/lol-v2",
+    "soumikrakshit/lol-dataset"
+  ]
+}

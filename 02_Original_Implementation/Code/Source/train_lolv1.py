@@ -496,7 +496,7 @@ if __name__ == "__main__":
     parser.add_argument("--data_root", type=str, default=os.path.join(BASE_DIR, "dataset_lolv1/lol_dataset"))
     parser.add_argument("--out", type=str, default=os.path.join(BASE_DIR, "lolv1_output"))
     parser.add_argument("--staging_dest", type=str, default=os.path.join(BASE_DIR, "FINAL_SUBMISSION/24BCE7695"))
-    parser.add_argument("--epochs", type=int, default=20)
+    parser.add_argument("--epochs", type=int, default=300)
     parser.add_argument("--batch", type=int, default=1)
     parser.add_argument("--crop", type=int, default=256)
     parser.add_argument("--lr", type=float, default=2e-4)
