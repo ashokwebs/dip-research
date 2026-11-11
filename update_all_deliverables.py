@@ -78,6 +78,7 @@ def update_paper():
         bce_doc_dir = os.path.join(BASE_DIR, "24BCE7695/02_Original_Implementation/Code/Documentation")
         os.makedirs(bce_doc_dir, exist_ok=True)
         shutil.copy2(pdf_path, os.path.join(bce_doc_dir, "Student_Research_Report.pdf"))
+        shutil.copy2(pdf_path, os.path.join(BASE_DIR, "24BCE7695/Student_Research_Report.pdf"))
         print(f" Recompiled LaTeX paper: {pdf_path} ({os.path.getsize(pdf_path)/1024:.1f} KB)")
 
     # Clean aux files in Research_Paper
@@ -113,6 +114,7 @@ def update_presentation():
         os.path.join(BASE_DIR, "04_Presentation"),
         os.path.join(BASE_DIR, "24BCE7695/04_Presentation"),
         BASE_DIR,
+        os.path.join(BASE_DIR, "24BCE7695"),
         os.path.join(BASE_DIR, "FOR_MACBOOK_KAGGLE")
     ]:
         os.makedirs(target_dir, exist_ok=True)

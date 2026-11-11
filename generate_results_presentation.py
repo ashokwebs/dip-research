@@ -481,7 +481,7 @@ def create_presentation():
     add_header(s5, "System Architecture", "FCE-Net End-to-End Pipeline & Module Breakdown",
                "Decoupled YUV mapping, 3-stage Haar wavelet decomposition, gated edge extraction, and color-guided fusion.")
 
-    net_img = find_img("network_architecture.png")
+    net_img = find_img("network_modified.png") or find_img("network_architecture.png")
     left_img_w = Inches(7.5)
     add_card(s5, Inches(0.8), Inches(1.85), left_img_w, Inches(4.75), "FCE-NET ARCHITECTURAL PIPELINE", SOFT_BLUE_BORDER, CARD_BG)
     if net_img:

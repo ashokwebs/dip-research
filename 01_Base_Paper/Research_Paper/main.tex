@@ -76,10 +76,8 @@ where $L(x, y)$ represents incident ambient illumination, $R(x, y)$ denotes surf
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.98\linewidth]{figures/modified_fce_net_architecture.png}
-\caption{\textbf{Comprehensive Architectural Evolution: Before Modification (Baseline FCE-Net) vs. After Modification (Proposed FCE-Net+).} 
-\textbf{Panel (a) Before Modification (Baseline FCE-Net, Guo et al., Springer Nature 2026):} Input RGB is mapped to YUV space. The luminance channel ($Y$) undergoes 2D Haar DWT frequency decomposition and GDEEM edge extraction. However, the global context refinement stage introduces an aggressive $8\times$ MaxPool downsampling step ($C \times \frac{H}{8} \times \frac{W}{8}$) to bypass the quadratic memory explosion $\mathcal{O}((HW)^2 \cdot C)$ of spatial MHSA. This downsampling annihilates 98.4\% of spatial resolution ($64\times$ spatial area), destroying high-frequency edge textures and inducing checkerboard blur upon $8\times$ bilinear upsampling, capping baseline performance at 24.82\,dB raw PSNR on LOL-v1.
-\textbf{Panel (b) After Modification (Proposed FCE-Net+, Akhil Harshavardhan, Reg: 24BCE7695):} Our proposed modification completely eliminates lossy downsampling heuristics by introducing the \textbf{Efficient Transposed Transformer Block (ETB)} directly at 100\% native spatial resolution. ETB incorporates \textbf{Multi-Dconv Head Transposed Attention (MDTA)}, computing cross-covariance across channel dimensions with linear complexity $\mathcal{O}(C^2 \cdot HW)$ ($32 \times 32$ attention map instead of $65,536 \times 65,536$, achieving a $4.19 \times 10^6 \times$ memory reduction), and the \textbf{Gated Dconv Feed-Forward Network (GDFN)} providing dynamic non-linear noise filtering. \textbf{After modification, the model achieves decisive SOTA supremacy}: LOL-v1 raw PSNR jumps to \textbf{27.48\,dB} (+2.66\,dB over base paper), GT-Mean reaches \textbf{28.12\,dB} (beating Retinexformer's 27.18\,dB), and LOL-v2 Real leaps to \textbf{29.24\,dB raw / 30.15\,dB GT-Mean} with a \textbf{68.2\% perceptual error drop} (LPIPS 0.089), adding only 35K parameters (0.72M total, 2.92\,MB footprint).}
+\includegraphics[width=0.98\linewidth]{figures/network_modified.png}
+\caption{\textbf{Overall Architecture of the Proposed FCE-Net+ for Low-Light Image Enhancement.} The model maps input RGB into decoupled YCbCr color space. The chrominance channels ($Cb, Cr$) undergo attention-guided denoising via twin U-Nets and Color Attention Guidance (CAGM). The luminance channel ($Y$) is decomposed via 2D Haar DWT frequency sub-bands and Gated Dilated Edge Extraction (GDEEM). In place of the baseline downsampled spatial attention, our proposed \textbf{Efficient Transposed Transformer Block (ETB)} integrates \textbf{Multi-Dconv Head Transposed Attention (MDTA)} and a \textbf{Gated Dconv Feed-Forward Network (GDFN)} directly at $100\%$ native spatial resolution, eliminating downsampling artifacts and quadratic memory overhead. Features are merged via Multi-Scale Enhancement Fusion (MSEF) to produce the enhanced output.}
 \label{fig:network_architecture}
 \end{figure*}
 
@@ -129,7 +127,7 @@ Wavelet transforms, specifically the 2D Discrete Wavelet Transform (DWT) \cite{m
 Standard spatial self-attention \cite{vaswani2017attention} computes token affinities across spatial dimensions $(HW \times HW)$, generating memory and computational bottlenecks that scale quadratically with image resolution. In high-resolution image restoration, transposed cross-covariance attention computes attention across channel dimensions $(C \times C)$, reducing memory footprint by orders of magnitude while preserving fine spatial texture without pooling \cite{zamir2022restormer}.
 
 \section{Original Architecture: Before Modification (Baseline FCE-Net)}
-The overall pipeline of FCE-Net before modification is illustrated in Figure~\ref{fig:network_architecture}(a). The architecture comprises three sequential operational phases: YUV color conversion, asymmetric luminance-chrominance processing, and multi-scale feature recombination.
+The overall pipeline of the network is illustrated in Figure~\ref{fig:network_architecture}. The architecture comprises three sequential operational phases: YUV color conversion, asymmetric luminance-chrominance processing, and multi-scale feature recombination.
 
 \subsection{Decoupled YCbCr Color Conversion}
 Given a normalized input low-light image $I_{RGB} \in [0, 1]^{B \times 3 \times H \times W}$, FCE-Net maps the tensor into the YCbCr color space using the standard ITU-R BT.601 linear transformation:
@@ -197,7 +195,7 @@ Guided color features and refined luminance features are integrated within the M
 
 \subsection{The Spatial Bottleneck of the Baseline (Before Modification)}
 \label{sec:bottleneck_before}
-A critical structural vulnerability exists in the baseline luminance refinement pipeline (Figure~\ref{fig:network_architecture}(a)). To capture global context, the original authors sought to apply Multi-Head Self-Attention (MHSA). However, standard spatial MHSA scales with quadratic complexity:
+A critical structural vulnerability exists in the baseline luminance refinement pipeline (Figure~\ref{fig:network_architecture}). To capture global context, the original authors sought to apply Multi-Head Self-Attention (MHSA). However, standard spatial MHSA scales with quadratic complexity:
 \begin{equation}
 \mathcal{C}_{\text{MHSA}} = \mathcal{O}\big( (H \cdot W)^2 \cdot C \big)
 \end{equation}
@@ -221,7 +219,7 @@ where $\mathcal{P}_{8\times}$ is $8\times$ MaxPool and $\mathcal{U}_{8\times}$ i
 
 \section{Proposed Architecture: After Modification (FCE-Net+)}
 \label{sec:after_modification}
-To fundamentally resolve the resolution loss of the baseline, we formulate and introduce \textbf{FCE-Net+} (Figure~\ref{fig:network_architecture}(b)). FCE-Net+ replaces the destructive $8\times$ MaxPool downsampling pathway with the \textbf{Efficient Transposed Transformer Block (ETB)}, which operates at \textbf{100\% native full spatial resolution} with linear $\mathcal{O}(C^2 \cdot HW)$ complexity.
+To fundamentally resolve the resolution loss of the baseline, we formulate and introduce \textbf{FCE-Net+} (Figure~\ref{fig:network_architecture}). FCE-Net+ replaces the destructive $8\times$ MaxPool downsampling pathway with the \textbf{Efficient Transposed Transformer Block (ETB)}, which operates at \textbf{100\% native full spatial resolution} with linear $\mathcal{O}(C^2 \cdot HW)$ complexity.
 
 \begin{table*}[t]
 \centering
