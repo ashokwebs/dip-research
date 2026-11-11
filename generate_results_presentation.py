@@ -483,10 +483,9 @@ def create_presentation():
 
     net_img = find_img("network_architecture.png")
     left_img_w = Inches(7.5)
+    add_card(s5, Inches(0.8), Inches(1.85), left_img_w, Inches(4.75), "FCE-NET ARCHITECTURAL PIPELINE", SOFT_BLUE_BORDER, CARD_BG)
     if net_img:
-        s5.shapes.add_picture(net_img, Inches(0.8), Inches(1.85), left_img_w, Inches(4.75))
-    else:
-        add_card(s5, Inches(0.8), Inches(1.85), left_img_w, Inches(4.75), "FCE-NET ARCHITECTURE DIAGRAM")
+        s5.shapes.add_picture(net_img, Inches(0.9), Inches(2.8), width=Inches(7.3))
 
     add_card(s5, Inches(8.6), Inches(1.85), Inches(3.933), Inches(4.75), "MODULAR ARCHITECTURAL STAGES", CARD_BORDER, CARD_BG)
     add_bullet_list(s5, Inches(8.8), Inches(2.4), Inches(3.533), Inches(4.0), [
@@ -1084,7 +1083,7 @@ def create_presentation():
 
     mod_arch_img = find_img("architecture_before_after.png") or find_img("modified_fce_net_architecture.png")
     if mod_arch_img:
-        s18.shapes.add_picture(mod_arch_img, Inches(0.8), Inches(1.8), Inches(7.0), Inches(4.8))
+        s18.shapes.add_picture(mod_arch_img, Inches(0.8), Inches(1.75), width=Inches(7.0))
     else:
         add_card(s18, Inches(0.8), Inches(1.8), Inches(7.0), Inches(4.8), "BEFORE VS. AFTER ARCHITECTURE")
 

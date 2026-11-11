@@ -13,6 +13,13 @@
 \usepackage{microtype}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{dblfloatfix}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.95}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.85}
+\renewcommand{\dbltopfraction}{0.95}
+\renewcommand{\dblfloatpagefraction}{0.85}
 
 \hypersetup{
     colorlinks=true,
@@ -132,9 +139,9 @@ Y \\ Cb \\ Cr
 \end{bmatrix}
 =
 \begin{bmatrix}
-0.29900 & 0.58700 & 0.11400 \\
--0.16874 & -0.33126 & 0.50000 \\
-0.50000 & -0.41869 & -0.08131
+0.299 & 0.587 & 0.114 \\
+-0.169 & -0.331 & 0.500 \\
+0.500 & -0.419 & -0.081
 \end{bmatrix}
 \begin{bmatrix}
 R \\ G \\ B
@@ -156,18 +163,18 @@ The luminance channel carries structural boundaries, texture details, and global
     \end{equation}
     \item \textbf{2D Haar DWT Sub-band Decomposition:} $F_Y^0$ passes through three cascaded High-Pass Blocks (HPB), decomposing features into four orthogonal quarter-resolution sub-bands $\{F_{LL}, F_{LH}, F_{HL}, F_{HH}\}$:
     \begin{align}
-    F_{LL}(i, j) &= \frac{1}{2}\big( x_{2i, 2j} + x_{2i+1, 2j} + x_{2i, 2j+1} + x_{2i+1, 2j+1} \big) \\
-    F_{LH}(i, j) &= \frac{1}{2}\big( x_{2i, 2j} - x_{2i+1, 2j} + x_{2i, 2j+1} - x_{2i+1, 2j+1} \big) \\
-    F_{HL}(i, j) &= \frac{1}{2}\big( x_{2i, 2j} + x_{2i+1, 2j} - x_{2i, 2j+1} - x_{2i+1, 2j+1} \big) \\
-    F_{HH}(i, j) &= \frac{1}{2}\big( x_{2i, 2j} - x_{2i+1, 2j} - x_{2i, 2j+1} + x_{2i+1, 2j+1} \big)
+    F_{LL} &= \tfrac{1}{2}(x_{2i,2j} + x_{2i+1,2j} + x_{2i,2j+1} + x_{2i+1,2j+1}) \\
+    F_{LH} &= \tfrac{1}{2}(x_{2i,2j} - x_{2i+1,2j} + x_{2i,2j+1} - x_{2i+1,2j+1}) \\
+    F_{HL} &= \tfrac{1}{2}(x_{2i,2j} + x_{2i+1,2j} - x_{2i,2j+1} - x_{2i+1,2j+1}) \\
+    F_{HH} &= \tfrac{1}{2}(x_{2i,2j} - x_{2i+1,2j} - x_{2i,2j+1} + x_{2i+1,2j+1})
     \end{align}
     The low-frequency sub-band $F_{LL}$ is refined via self-attention, while high-frequency sub-bands undergo dense convolutional filtering before 2D Inverse DWT (IDWT) synthesis.
     \item \textbf{Gated Dilated Edge Extraction Module (GDEEM):} Contours are extracted via dilated convolutions ($d=2$) modulated by a learned gating map:
     \begin{align}
-    F_{dilated} &= \text{Conv}_{3\times3, d=2}(F_{HLFDB}) \\
-    F_{pointwise} &= \text{Conv}_{1\times1}(F_{HLFDB}) \\
-    F_{gate} &= \sigma\Big( \text{Conv}_{1\times1}(F_{dilated} + F_{pointwise}) \Big) \\
-    F_{Edge} &= F_{HLFDB} + F_{gate} \odot \text{Conv}_{3\times3}(F_{dilated} + F_{pointwise})
+    F_{dil} &= \text{Conv}_{3\times3, d=2}(F_{HLFDB}) \\
+    F_{pt} &= \text{Conv}_{1\times1}(F_{HLFDB}) \\
+    F_{gate} &= \sigma\big( \text{Conv}_{1\times1}(F_{dil} + F_{pt}) \big) \\
+    F_{Edge} &= F_{HLFDB} + F_{gate} \odot \text{Conv}_{3\times3}(F_{dil} + F_{pt})
     \end{align}
 \end{enumerate}
 
@@ -177,8 +184,9 @@ Under low-light capture, chrominance channels ($Cb, Cr$) exhibit severe color bl
 \subsection{Color Attention Guidance (CAGM) and Multi-Scale Fusion (MSEF)}
 Restored chrominance features are concatenated and dynamically recalibrated via the Color Attention Guidance Module (CAGM):
 \begin{equation}
-W_{color} = \sigma\Big( W_2 \cdot \text{ReLU}\big( W_1 \cdot \text{GAP}([F_{Cb}, F_{Cr}]) \big) \Big) \in \mathbb{R}^{B \times 64 \times 1 \times 1}
+W_{color} = \sigma\Big( W_2 \cdot \text{ReLU}\big( W_1 \cdot \text{GAP}([F_{Cb}, F_{Cr}]) \big) \Big)
 \end{equation}
+generating dynamic weights $W_{color} \in \mathbb{R}^{B \times 64 \times 1 \times 1}$.
 \begin{equation}
 F_{color}^{guided} = W_{color} \odot [F_{Cb}, F_{Cr}]
 \end{equation}
@@ -201,8 +209,9 @@ demanding over 17.1\,GB of GPU memory per batch sample, which is utterly impossi
 
 To circumvent this memory explosion, the baseline architecture implemented an aggressive downsampling heuristic:
 \begin{equation}
-F_Y^{final} = F_{Edge} + \text{Upsample}_{8\times}\Big( \text{MHSA}\big( \text{MaxPool}_{8\times}(F_{Edge}) \big) \Big)
+F_Y^{final} = F_{Edge} + \mathcal{U}_{8\times}\Big( \text{MHSA}\big( \mathcal{P}_{8\times}(F_{Edge}) \big) \Big)
 \end{equation}
+where $\mathcal{P}_{8\times}$ is $8\times$ MaxPool and $\mathcal{U}_{8\times}$ is $8\times$ bilinear upsampling.
 \textbf{The severe pitfalls of this baseline design are three-fold:}
 \begin{enumerate}
     \item \textbf{Destruction of 98.4\% of Spatial Detail:} Downsampling by an $8\times8$ MaxPool operator reduces spatial area by a factor of $64\times$ ($\frac{H}{8} \times \frac{W}{8}$). Consequently, 98.4\% of high-frequency edge textures and wavelet coefficients are permanently annihilated before attention computation.
@@ -328,7 +337,11 @@ MS-SSIM & $\mathcal{L}_{MS-SSIM}$ & $0.2500$ & Multi-scale structural fidelity \
 \subsection{Smooth L1 Reconstruction Loss (\texorpdfstring{$\mathcal{L}_{\text{SL1}}$}{L_SL1})}
 Smooth L1 provides robust pixel-wise supervision without gradient explosion on high-contrast edges:
 \begin{equation}
-\mathcal{L}_{\text{SL1}}(y, \hat{y}) = \frac{1}{N} \sum_{i=1}^N z_i, \quad z_i = \begin{cases} 0.5 (y_i - \hat{y}_i)^2, & \text{if } |y_i - \hat{y}_i| < 1 \\ |y_i - \hat{y}_i| - 0.5, & \text{otherwise} \end{cases}
+\mathcal{L}_{\text{SL1}}(y, \hat{y}) = \frac{1}{N} \sum_{i=1}^N z_i
+\end{equation}
+where the per-pixel transition variable $z_i$ is defined as:
+\begin{equation}
+z_i = \begin{cases} 0.5 (y_i - \hat{y}_i)^2, & \text{if } |y_i - \hat{y}_i| < 1 \\ |y_i - \hat{y}_i| - 0.5, & \text{otherwise} \end{cases}
 \end{equation}
 
 \subsection{VGG-19 Perceptual Feature Loss (\texorpdfstring{$\mathcal{L}_{\text{VGG}}$}{L_VGG})}
