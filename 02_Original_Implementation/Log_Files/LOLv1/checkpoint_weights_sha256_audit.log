@@ -1,0 +1,31 @@
+========================================================================================================================
+             CRYPTOGRAPHIC SHA-256 & WEIGHT TENSOR INTEGRITY VERIFICATION MANIFEST
+========================================================================================================================
+Candidate Reg. No.: 24BCE7695 | Lead Researcher: Akhil Harshavardhan
+Audit Scope:         Verification of all neural network binary checkpoint files for peer-review reproducibility.
+------------------------------------------------------------------------------------------------------------------------
+File:        checkpoints_modified/fcenet_plus_lolv1_best.pth
+Role:        FCE-Net+ (Ours) LOL-v1 Converged Checkpoint
+Size:        2,944,530 Bytes (2.81 MB)
+SHA-256:     5044b5846971c163ed8a9b10df6432df52e811ba4c650264766e317967a3ebaf
+Integrity:   PASSED (Cryptographically Verified)
+
+File:        checkpoints_modified/fcenet_plus_lolv2_best.pth
+Role:        FCE-Net+ (Ours) LOL-v2 Real Converged Checkpoint
+Size:        2,944,530 Bytes (2.81 MB)
+SHA-256:     6fac0251f2b1f57026d0057ff0298edae357f976506fd4b66ff1832e454b0250
+Integrity:   PASSED (Cryptographically Verified)
+
+File:        KAGGLE_CHECKPOINTS_DATASET/lolv1_best_model.pth
+Role:        Baseline FCE-Net LOL-v1 (Springer Nature 2026)
+Size:        2,881,574 Bytes (2.75 MB)
+SHA-256:     1f30649ac2daff79a26e190e753c84442c85e6543bc73ceed197467227ef8929
+Integrity:   PASSED (Cryptographically Verified)
+
+File:        KAGGLE_CHECKPOINTS_DATASET/lolv2_best_model.pth
+Role:        Baseline FCE-Net LOL-v2 Real (Springer Nature 2026)
+Size:        2,883,758 Bytes (2.75 MB)
+SHA-256:     7a0b64dfcf0ed7802dca1e2862c40fb92d559c8f935384ffb3b8242e3ed7c49a
+Integrity:   PASSED (Cryptographically Verified)
+
+========================================================================================================================

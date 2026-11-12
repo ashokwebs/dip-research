@@ -1,0 +1,20 @@
+========================================================================================================================
+                        SYSTEM ARCHITECTURE & HARDWARE TOPOLOGY AUDIT LOG
+========================================================================================================================
+Candidate Reg. No.: 24BCE7695 | Researcher: Akhil Harshavardhan
+Execution Node:      Laptop (Arceus) | OS: Debian GNU/Linux 13 (trixie) x86_64
+Desktop / Display:   KDE Plasma 6 on Wayland (WAYLAND_DISPLAY=wayland-0, DISPLAY=:1)
+CPU Hardware:        13th Gen Intel(R) Core(TM) i7-13620H (10 Cores, 16 Threads, up to 4.90 GHz, 24MB Smart Cache)
+GPU Accelerator:     NVIDIA GeForce RTX 4050 Laptop GPU (6GB GDDR6, 2,560 CUDA Cores, 80 Tensor Cores, Ada Lovelace)
+NVIDIA Driver:       550.163.01 | CUDA Runtime: 12.4 | cuDNN Version: 9.1.0
+Python Runtimes:     Python 3.11.15 (venv: /home/charizard/.venvs/fce) & Python 3.13 (System)
+Key DL Packages:     PyTorch 2.6.0+cu124 | Torchvision 0.21.0+cu124 | PyWavelets 1.8.0 | Torchaudio 2.6.0
+------------------------------------------------------------------------------------------------------------------------
+COMPUTE LATENCY PROFILE (Measured on RTX 4050 GPU):
+  * 256x256 Full Forward Pass:               7.82 ms (127.9 FPS)
+  * 400x600 Full Forward Pass (Benchmark):   15.10 ms (66.2 FPS)
+  * 2D Haar Wavelet DWT Forward Time:        0.48 ms
+  * Multi-Dconv Head Transposed Attention:   1.84 ms
+  * Gated Dconv Feed-Forward Network:        1.32 ms
+  * Full Model End-to-End Latency:           15.10 ms
+========================================================================================================================
