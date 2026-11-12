@@ -423,7 +423,7 @@ To prevent inadvertent 5-hour full training runs when users execute "Run All" in
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.95\linewidth]{figures/qualitative_comparison.png}
-\caption{\textbf{Qualitative Low-Light Enhancement Triplets on Benchmark Scenes.} Visual comparison between (a) Raw Low-Light Inputs, (b) FCE-Net Enhanced Outputs (Ours), and (c) Normal-Light Ground Truth. Rows 1--2 display LOLv1 scenes \#22 (25.64\,dB) and \#665 (25.50\,dB). Rows 3--4 display LOLv2 Real-Captured test scenes \#low00690 (22.28\,dB) and \#low00709 (18.02\,dB). Notice the natural illumination recovery, edge sharpness, and complete absence of color cast or chromatic noise.}
+\caption{\textbf{Qualitative Low-Light Enhancement Triplets on Benchmark Scenes.} Visual comparison between (a) Raw Low-Light Inputs, (b) FCE-Net Enhanced Outputs (Ours), and (c) Normal-Light Ground Truth across LOLv1 scenes \#22 (25.64\,dB) and \#665 (25.50\,dB), and LOLv2 Real scenes \#low00690 (22.28\,dB) and \#low00709 (18.02\,dB). Each panel displays color-coded bounding boxes (Orange: edge/texture recovery; Cyan: noise suppression) with corresponding magnified zoom insets and quantitative metric badges.}
 \label{fig:qualitative_triplets}
 \end{figure*}
 
@@ -505,14 +505,14 @@ The empirical results compiled in Table~\ref{tab:before_after_matrix} and Table~
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.98\linewidth]{figures/fcenet_plus_lolv1_gallery.png}
-\caption{\textbf{Extensive Qualitative Enhancement Gallery on LOL-v1 Benchmark Scenes.} Visual comparison between (a) Raw Low-Light Inputs, (b) Baseline FCE-Net (Before Modification: Springer Nature 2026), (c) Proposed FCE-Net+ (After Modification: Novel Transposed Transformer MDTA + GDFN, Ours), and (d) Normal Ground Truth Reference across five canonical test scenes: \#1, \#22, \#55, \#665, and \#778. Notice the substantially improved luminance recovery, complete absence of chromatic artifacts, and crystal-clear boundary textures achieved After Modification compared to Before Modification.}
+\caption{\textbf{Extensive Qualitative Enhancement Gallery on LOL-v1 Benchmark Scenes.} Visual comparison between (a) Raw Low-Light Inputs, (b) Baseline FCE-Net (Before Modification: Springer Nature 2026), (c) Proposed FCE-Net+ (After Modification: Novel Transposed Transformer MDTA + GDFN, Ours), and (d) Normal Ground Truth Reference across five canonical test scenes: \#1, \#22, \#55, \#665, and \#778. Each panel includes dual-color bounding boxes (Orange: edge texture; Cyan: color preservation) with magnified zoom insets and quantitative PSNR/SSIM badges. Notice the substantially improved luminance recovery and crisp boundary textures achieved After Modification.}
 \label{fig:fcenet_plus_lolv1_gallery}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.98\linewidth]{figures/fcenet_plus_lolv2_gallery.png}
-\caption{\textbf{Hardware Sensor Qualitative Benchmark on LOL-v2 Real Dual-Exposure Test Scenes.} Comparison on physical sensor captures under severe photon starvation and read noise across scenes \#low00690, \#low00700, \#low00720, \#low00750, and \#low00780: (a) Raw Low-Light Inputs, (b) Baseline FCE-Net (Before Modification), (c) Proposed FCE-Net+ (After Modification, Ours), and (d) Normal Ground Truth. After Modification, FCE-Net+ effectively suppresses heavy Poisson dark current noise without blurring critical fine details.}
+\caption{\textbf{Hardware Sensor Qualitative Benchmark on LOL-v2 Real Dual-Exposure Test Scenes.} Comparison on physical sensor captures under severe photon starvation across scenes \#low00690, \#low00700, \#low00720, \#low00750, and \#low00780: (a) Raw Low-Light Inputs, (b) Baseline FCE-Net (Before Modification), (c) Proposed FCE-Net+ (After Modification, Ours), and (d) Normal Ground Truth. Dual-color zoom insets and metric badges highlight how FCE-Net+ effectively suppresses heavy Poisson read noise without blurring critical fine textures.}
 \label{fig:fcenet_plus_lolv2_gallery}
 \end{figure*}
 

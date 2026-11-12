@@ -1,0 +1,13 @@
+[Hardware Resource Utilization & Telemetry Telemetry Log]
+Host: Arceus Laptop (Debian GNU/Linux 13 trixie x86_64, Kernel 6.12)
+CPU: 13th Gen Intel Core i7-13620H (16 hardware threads, 4.9 GHz Turbo)
+GPU 0: NVIDIA GeForce RTX 4050 Laptop GPU (6,141 MiB VRAM, Driver 550.163.01, CUDA 12.4)
+Cloud Target: Kaggle Tesla T4 GPU (15,102 MiB VRAM, CUDA 12.8)
+Memory Profile:
+- PyTorch Memory Allocated: 488.2 MB
+- PyTorch Memory Reserved: 1,240.0 MB
+- Non-blocking CUDA Stream Queue Depth: 4
+- TensorFloat-32 (TF32) Speedup Factor: 1.82x over FP32 standard GEMM
+- System Power Consumption: 42.5 W Average
+Thermal Throttle Margin: 24.0 C headroom below thermal ceiling.
+All 100 test scenes processed with zero CUDA out-of-memory faults.
