@@ -24,4 +24,6 @@ dataset_lolv2/
 
 # Temporary
 *.tmp
-*.log
+# Keep official research log files
+!*/Log_Files/*.log
+!*.log
